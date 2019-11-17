@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/league.css">
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+    <style media="screen">
+
+
+		.reveal p.large {
+			font-size: 150%;
+		}
+		.reveal p.small {
+			font-size: 80%;
+			line-height: 1;
+		}
+		.reveal p.footnote {
+			font-size: 30%;
+		}
+		<!--.reveal p.email {-->
+			<!--font-family: "White Rabbit", Helvetica, sans-serif;z-->
+			<!--font-size: 80%;-->
+			<!--color: #2A76DD-->
+		<!--}-->
+		.reveal section img {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+		}
+		<!--.reveal img.aligned {-->
+			<!--display: inline-block;-->
+			<!--margin: 0;-->
+		<!--}-->
+		.reveal img.no-border {
+			border: none;
+		}
+		.reveal section img.icon {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+			vertical-align: middle;
+			width:1em;
+		}
+		.reveal p.references {
+			margin-top: 2em;
+			text-align: right;
+		}
+		body {
+			<!--text-shadow: 0 0 7px #212121;-->
+		}
+		.slides .footer{
+		  position:absolute;
+			font-size: 60%;
+		  bottom: -50%;
+		}
+		#left {
+		  left:-8.33%;
+		  text-align: left;
+		  float: left;
+		  width:40%;
+		  z-index:-10;
+		}
+
+	#right {
+		  left:31.25%;
+		  top: 75px;
+		  float: right;
+		  text-align: left;
+		  z-index:-10;
+		  width:60%;
+		}
+
+        .nb_spec>div {
+            margin-bottom: 8%;
+        }
+		.half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 50%;
+		}
+		.third {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 33%;
+		}
+		.small-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 20%;
+		}
+		.big-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 80%;
+		}
+		.two-halves {
+			display: flex;
+		}
+		.parts {
+			display: flex;
+		}
+		.fragment.current-visible.visible:not(.current-fragment) {
+		    display: none;
+		    height:0px;
+		    line-height: 0px;
+		    font-size: 0px;
+		}
+
+
+         <!--code > .step_output {-->
+            <!--color: #0a1532;-->
+            <!--font-weight: bold;-->
+		 <!--}-->
+		 <!--code > .step_input {-->
+		    <!--color: #81d2c7ff;-->
+            <!--font-weight: bold;-->
+		 <!--}-->
+		<!--.highlight {-->
+			<!--color: #81d2c7ff;-->
+            <!--font-weight: bold;-->
+		<!--}-->
+		.step_cmd {
+			color: grey;
+		}
+		.select {
+		        color: white;
+                <!--background-color: #98bdef;-->
+		}
+
+
+
+
+        .fragment.highlight-blue.visible {
+            font-weight: bold;
+            font-family: "White Rabbit", Helvetica, sans-serif;
+text-shadow: 0 0 7px #212121;
+    color: #16a6b3 !important;
+        }
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Tests & Reliability in Machine Learning Projects </h2>
+            <p><i>
+                <small> Stéphanie Bracaloni</small>
+            </i></p>
+        </section>
+
+
+        <!--INTRO-->
+
+        <section>
+            <section>
+                <h3>About Me</h3>
+                <div class="parts">
+                    <div class='half' style="text-align: left">
+
+                        <div class="two-halves">
+                            <div class='small-half' style="flex-basis: 25%;">
+                                <img src="img/me.png" style="width: 4em"/>
+                            </div>
+                            <div class='big-half' style="text-align: left">
+                                <span class="emph"><b>Stéphanie</b><br/><b>Bracaloni</b></span><br/>
+                            </div>
+                        </div>
+                        <img class="icon" src="./img/GitHub-logo.png"
+                             style="width: 1em"/> @sbracaloni
+
+                    </div>
+                    <div class="third">
+
+                    </div>
+                    <div class="half" style="text-align: right">
+                        <img class="plain" src="./img/iotic.png" alt="PeopleDoc logo"
+                             style="width:4em"><br/>
+                        <span class="emph"><b>Iotic Labs</b></span><br/>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <h3>I don't know a lot of stuff about data
+                    science</h3>
+                <div class="part">
+                    <img class="fragment" data-fragment-index="1" src="./img/ml.png"
+                         style="height: 6em"><br/>
+                    <img class="fragment" data-fragment-index="2" src="./img/homer.gif"
+                         style="height:5em">
+                    <img class="fragment" data-fragment-index="3" src="./img/goldfish.gif"
+                         style="width:5em; height:5em">
+
+                </div>
+            </section>
+            <section>
+                <h3 data-fragment-index="1">I'm software engineer since 2013</h3>
+                <h4 class="fragment" data-fragment-index="3">Automation, Code Quality, <b>Testability</b>
+                </h4>
+                <div class="part">
+                    <img class="fragment" data-fragment-index="2" src="./img/giphy.gif">
+
+                </div>
+            </section>
+            <section>
+                <h3 class="fragment" data-fragment-index="1">Spent some time making ML POC
+                    production ready</h3>
+                <!--<div class="part">-->
+                <img class="fragment" data-fragment-index="2" src="./img/pydata.jpeg"
+                     style="width:6em"/>
+                <img class="fragment" data-fragment-index="3" src="./img/pyconlt.png"
+                     style="width:8em"/>
+                <img class="fragment" data-fragment-index="4" src="./img/meetup.svg"
+                     style="width:6em"/>
+
+                <!--</div>-->
+            </section>
+
+        </section>
+
+        <!--CONTEXT POC Needs test-->
+
+        <section>
+            <! Intro !>
+            <section>
+                <h3>Sharing my experience</h3>
+                <h4>Bringing an ML POC to PROD</h4>
+
+            </section>
+            <section>
+                <h3>The Story</h3>
+                <h4>We just finished a promising document classifier POC</h4><br/>
+                <img class="plain" src="./img/poc.png" style="width:4em"/>
+                <img class="plain" src="./img/check.png" style="width:4em"/>
+                <img class="plain" src="./img/thumb-up-sign.png" style="width:4em"/>
+            </section>
+
+            <section>
+                <div>
+                    <img class="fragment current-visible preload" src="./img/poc_worst.jpg">
+                    <img class="fragment current-visible" src="./img/poc_worst2.jpg">
+                    <img class="fragment current-visible" src="./img/poc_worst3.jpg">
+                </div>
+            </section>
+            <section style="max-height:100%; max-width:100%, font-size">
+                <!--<pre><code class="python highlight" data-line-numbers="4,8-11">-->
+                <!--<pre><code class="python highlight" data-line-numbers="4,8-11">>-->
+                <pre><code class="python highlight" style="max-height:100%; max-width:100%; font-size: 40%;
+    margin-top: -5%;">def make_preprocessing(trainset_file):
+    df = pd.read_csv(trainset_file)
+    df = df[df['img_paths'] != '']
+    df['img_paths'] = df['img_paths'].str.split(',')
+    res = np.empty((len(df), 250 * 250 + 1))
+    for i, all_path in enumerate(df['img_paths']):
+        for path in all_path:
+            # Get the right path
+            if path.startswith('http://'):
+                check_call('wget', path)
+                path = path.split('/')[-1]
+            if path.endswith('pdf'):
+                check_call('pdfimages', '-j', '-png', path)
+                reference = ''.join(path.split('.')[:-1])
+                path = os.path.join(reference, os.path.basename(path) + '_img-01')
+            if path.endswith('jpeg'):
+                check_call('mv', path, path.replace('jpeg', 'png'))
+            if path.startswith('/already_processed'):
+                continue
+            base_name = path.split('.')[0]
+            img_name = os.path.join(root_dir, base_name, path)
+            image = cv2.imread(img_name)
+            image = cv2.resize(image, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+            if image.shape[-1] == 4:
+                image = cv2.cvtColor(image, cv2.COLOR_BGRA2BGR)
+                res[i, 1:] = image
+            else:
+                # try to  put in JET
+                f = np.fft.fft2(image)
+                fshift = np.fft.fftshift(f)
+                rows, cols = image.shape
+                crow, ccol = rows / 2, cols / 2
+                fshift[crow - 30:crow + 30, ccol - 30:ccol + 30] = 0
+                f_ishift = np.fft.ifftshift(fshift)
+                img_back = np.fft.ifft2(f_ishift)
+                img_back = np.abs(img_back)
+                if not is_too_dark(img_back):
+                    res[i, 1:] = img_back
+            res[i:0] = df['cat'].iloc[i]
+            i += 1
+    return res
+                </code></pre>
+            </section>
+            <section>
+                <img src="./img/jupyter.png">
+            </section>
+            <section>
+                <h3>POC to PROD</h3>
+                <ul class="fragment">
+                    <li class="fragment">Remove hardcoded stuff</li>
+                    <li class="fragment">Split the code into several pipeline
+                        steps
+                    </li>
+                    <li class="fragment">Automate the pipeline</li>
+                    <li class="fragment">Package</li>
+                    <li class="fragment"><span class="fragment highlight-blue">Tests</span></li>
+                </ul>
+                <aside class="notes">
+                    Make the code production ready: be able to run on any server (with the right
+                    conf)
+                    automatise, package.
+                    TESTS (today we will talk about tests)
+                </aside>
+            </section>
+            <section>
+                <h3 class="fragment" data-fragment-index="1">Side note:</h3>
+                <p class="fragment" data-fragment-index="1"> I have a set of Jupyter Notebooks so I
+                    can't write tests !</p>
+                <div class="two-halves">
+
+                    <div class="half fragment" data-fragment-index="1">
+                        <img src="./img/shrugging.gif"/>
+                    </div>
+                    <div class="half fragment" data-fragment-index="3">
+                        <h3 style="color:green">You can !</h3>
+                        <p><b>MLV-tools</b>: github.com/sbracaloni/ml-versioning-tools</p>
+                        <img class="plain" src="./img/papermill.png"/>
+                    </div>
+                </div>
+
+            </section>
+            <section>
+                <span class="fragment" data-fragment-index="1"></span>
+                <span class="fragment" data-fragment-index="8">TDD</span>
+                <span class="fragment" data-fragment-index="5">Continuous Integration</span>
+                <span class="fragment" data-fragment-index="3">Hypothesis</span>
+                <span class="fragment" data-fragment-index="7">Unit tests</span>
+                <span class="fragment" data-fragment-index="3">Mock</span>
+                <span class="fragment" data-fragment-index="5">Regression</span>
+                <span class="fragment" data-fragment-index="4">Large tests</span>
+                <span class="fragment" data-fragment-index="8">Functional tests</span>
+                <span class="fragment" data-fragment-index="3">Stub</span>
+                <span class="fragment" data-fragment-index="8">Coverage</span>
+                <span class="fragment" data-fragment-index="6">Determinism</span>
+                <span class="fragment" data-fragment-index="7">Pytest</span>
+                <span class="fragment" data-fragment-index="6">Fixture</span>
+                <span class="fragment" data-fragment-index="2">tox</span>
+                <span class="fragment" data-fragment-index="8">Automation</span>
+                <span class="fragment" data-fragment-index="4">data</span>
+                <br/>
+                <p style="font-size:150%"><span class="fragment emph">Overwhelming</span> <span
+                        class="fragment emph">& Confusing</span></p>
+            </section>
+            <section>
+                <h3>Why (do we need tests)?</h3>
+                <h3>What (do we need to test)?</h3>
+                <h3>How (to test it)?</h3>
+
+                <aside class="notes">
+                    try to ask good questions
+                </aside>
+            </section>
+
+        </section>
+
+
+        <!--TEST THE WHOLE PIPELINE -->
+        <section>
+            <section>
+                <h2>End to end test on the whole pipeline</h2>
+            </section>
+            <section>
+                <h3>The pipeline</h3>
+                <img src="./img/pipeline.png"/>
+            </section>
+
+            <section>
+                <h3>Promising algorithm changes</h3>
+                <ul>
+                    <li>1. Push your PR</li>
+                    <li>2. Go to the test server</li>
+                    <li>3. Checkout you branch</li>
+                    <li>4. Run the pipeline</li>
+                    <li>5. Wait for 1 hour</li>
+                    <li>6. Then...</li>
+                </ul>
+            </section>
+            <section>
+                <h3>1. I have a huge diff in the metrics</h3>
+                <data class="parts fragment">
+                    <div class="small-half">
+                        <img src="./img/man-thinking.png" style="height:3em"/>
+                    </div>
+                    <div class="big-half" style="text-align: left">
+                        <i> It seems my algo had a better results in my Jupyter Notebook
+                            (on selected preprocessed data)
+                        </i>
+                    </div>
+                </data>
+
+                <ul style="margin-top:2%">
+                    <li class="fragment">Did I discard to much data in the extraction?</li>
+                    <li class="fragment">Did something go wrong during the preprocessing? (Pipeline or Algorithm issue?)</li>
+                    <li class="fragment">What was I doing? I can't remember, the pipeline is so long
+                        that I switched to an other project in the meantime ...
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3 class="fragment">2. The metric diff is just above the threshold</h3>
+                <ul>
+                    <li class="fragment">What is the best way to choose this threshold?</li>
+                    <li class="fragment">Is it really bad?</li>
+                </ul>
+            </section>
+            <section>
+                <h3>3. I have this error</h3>
+                <!--<pre><code class="python highlight" data-line-numbers="4,8-11">>-->
+                <pre><code class="bash highlight"
+                           style="max-height:100%; max-width:120%; font-size:73%"
+                           data-line-numbers="1,18">ERROR:root:'nested_cat'
+Traceback (most recent call last):
+  File "/python3.7/site-packages/pandas/core/indexes/base.py", line 2897, in get_loc
+    return self._engine.get_loc(key)
+  File "pandas/_libs/index.pyx", line 107, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 131, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1607, in
+                    pandas._libs.hashtable.PyObjectHashTable.get_item
+ [...]
+  File "/python3.7/site-packages/pandas/core/frame.py", line 2995, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/python3.7/site-packages/pandas/core/indexes/base.py", line 2899, in get_loc
+    return self._engine.get_loc(self._maybe_cast_indexer(key))
+  File "pandas/_libs/index.pyx", line 107, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 131, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1607, in [...]
+  File "pandas/_libs/hashtable_class_helper.pxi", line 1614, in [...]
+KeyError: 'nested_cat'
+                </code> </pre>
+
+            </section>
+            <section>
+                <h3>4. Or Worse</h3>
+                <pre><code class="python highlight"
+                           data-line-numbers="1">ERROR:root:'nested_cat'</code></pre>
+
+                <pre class="fragment"><code class="bash highlight" data-line-numbers="1-4">Traceback (most recent call last):
+  File "/example.py", line 83, in module
+    float_img = img.astype('float')
+AttributeError: 'NoneType' object has no attribute 'astype'</code></pre>
+                <pre class="fragment"><code class="python highlight">
+import cv2
+img = cv2.imread(image_path)
+# [do something else]
+# ...
+# ...
+# ...
+# then
+float_img = img.astype('float')
+                </code></pre>
+
+            </section>
+            <section>
+                <h3>Pro/Cons</h3>
+                <div class="two-halves">
+
+                    <div class="half fragment" data-fragment-index="2">
+                        <ul>
+                            <li>Test the whole pipeline like in production</li>
+                        </ul>
+                    </div>
+                    <div class="half fragment" data-fragment-index="3">
+                        <ul>
+                            <li class="fragment">Time consuming</li>
+                            <li class="fragment">Far away from exhaustive</li>
+                            <li class="fragment">Not easy to debug/reproduce</li>
+                            <li class="fragment">Need real relevant data (a lot)/ environment</li>
+                            <li class="fragment">Can't be easily automated</li>
+                            <li class="fragment">Not run on each PR</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h3>Conclusion</h3>
+                <p class="fragment">
+                <p>You probably have a new promising algorithm!</p>
+                <p>...</p>
+                <p class="fragment">or not.</p>
+                <p class="fragment">But you spent 2 days in a fight with the pipeline</p>
+                <img class="fragment fade-up" src="./img/crying_unicorn.png" style="width:2em"/>
+
+            </section>
+        </section>
+
+        <!-- Test by layers -->
+        <section>
+            <section>
+                <h2>Test Tips & Tricks</h2>
+            </section>
+
+            <section>
+                <h3>Organise tests by layers</h3>
+                <p class="fragment current-visible preload"><img src="./img/test_pyramid.png"
+                                                                 style="height:12em"/></p>
+                <p class="fragment current-visible"><img src="./img/test_pyramid2.png"
+                                                         style="height:12em"/><br/>
+                    Class/Function/Method... Single Responsibility</p>
+                <p class="fragment current-visible"><img src="./img/test_pyramid3.png"
+                                                         style="height:12em"/><br/> Interaction
+                    between 2 or 3 Responsibilities</p>
+                <p class="fragment current-visible"><img src="./img/test_pyramid4.png"
+                                                         style="height:12em"/><br/> E2E test
+                    without load or real data</p>
+                <p class="fragment current-visible"><img src="./img/test_pyramid5.png"
+                                                         style="height:12em"/></p>
+
+                <aside class="notes">
+                    What is a unit test?
+                    If you ask three different people what "unit" means in the context of unit
+                    tests, you'll probably receive four different, slightly nuanced answers.
+                    To a certain extent it's a matter of your own definition and it's okay to have
+                    no canonical answer.
+                    => Test a function or a "public" method. Test a single responsibility thing
+                    (without interaction with other components)
+                </aside>
+            </section>
+            <section>
+                <h3>"Don't Skip Trivial Tests"</h3>
+                <h3>"Test code is just as important as production code"</h3>
+                <h4><i>Clean Code (Robert C. Martin)</i></h4>
+                <aside class="notes">
+                    - easy to write
+                    - documentary value
+                    - huge benefits to avoid side effect (new feature/refactoring)
+                    - not a second class citizen. You have to design it, refactor it and review it
+                </aside>
+            </section>
+            <section>
+
+                <h3> Use meaningful names</h3>
+
+                <pre class="fragment"  data-fragment-index="1"><code>def extract_images_from_pdf(content:bytes):
+    [...]
+                </code></pre>
+                <div class="parts fragment"  data-fragment-index="2">
+                    <div class="big-half">
+                        <pre><code>def test_extract_img_1():
+def test_extract_img_2():</code></pre>
+                    </div>
+                    <div class="small-half">
+                        <img src="./img/wrong.png" style="width:1em">
+                    </div>
+                </div>
+                <div class="parts fragment"  data-fragment-index="3">
+                    <div class="big-half">
+                        <pre><code class="python highlight"
+                                   style="max-height:100%; max-width:100%;">def test_should_extract_single_image_from_pdf():
+def test_should_extract_several_images_from_pdf():
+def test_extract_images_should_raise_if_empty_content():
+                </code></pre>
+                    </div>
+                    <div class="small-half">
+                        <img src="./img/ok.png" style="width:3em">
+                    </div>
+                </div>
+                <div class="fragment"  data-fragment-index="3">Overview of all the test scenario. <br/>~Almost auto-documented</div>
+                <aside class="notes">
+                    Self documented tests. More readable. Keep consitency. Avoid to duplicate test
+                </aside>
+            </section>
+            <section>
+                <h3>Readable tests</h3>
+
+
+                <pre class="fragment"><code class="python highlight"
+                                            style="max-height:100%; max-width:100%; font-size: 90%">def test_save_image():
+    with TemporaryDirectory() as work_dir:
+        tiny_gif = b'GIF89a\x01\x00\x01\x00\x00\xff\x00,\x00' \
+                   b'\x00\x00\x00\x01\x00\x01\x00\x00\x02\x00;'
+        image_path = join(work_dir, 'imgs', 'img.png')
+        image_to_save = ImageToSave(filename=image_path, tiny_gif)
+
+        save_image(image_to_save))
+
+        assert exists(image_to_save.path)</code></pre>
+
+                <pre class="fragment"><code
+                        style="max-height:100%; max-width:100%; margin-top:3%; font-size: 90%"
+                >def test_save_image(image_to_save):
+    save_image(images=image_to_save)
+
+    assert exists(image_to_save.path)</code></pre>
+                <p class="fragment">Use fixtures and helpers to improve the test readability. Focus on the test purpose.</p>
+                <aside class="notes">
+                    - Test muts tell a history
+                    - need to quickly what is the test scenario
+                </aside>
+            </section>
+            <section>
+                <h3>Organise your tests</h3>
+                <img src="./img/code_struct.png" style="height:11em"/>
+                <p>Keep the same structure. Be consistent.</p>
+                <aside class="notes">
+                    Quick access to tests, avoid duplication.
+                    Easier for refactoring
+
+                </aside>
+            </section>
+
+            <section>
+                <h3>Never ignore a test</h3>
+                <pre><code>
+@pytest.mark.skip(reason="Unstable")
+def test_we_will_ignore_forever():
+    [...]
+                    </code></pre>
+<div>Worse than commented code.</div>
+                <aside class="notes">
+                    - if a test is ignored => there is an ambigutee
+                    - a breaking change
+                    - An ignored test will never be re-instated
+                    - Give the illusion there is a test
+                </aside>
+            </section>
+            <section>
+                <h3>Arch Enemy: Flaky Test</h3>
+                <div style="text-align:left" class="fragment"><b>Sources of Flakiness</b>
+                    <ul>
+                        <li>Call to an external resource</li>
+                        <li>Bad synchronisation: <b>time.sleep</b></li>
+                        <li>Random data</li>
+                        <li>Global state</li>
+                        <li>Side effect between tests</li>
+                        <li>...</li>
+                    </ul>
+                </div>
+                <img class="fragment" src="./img/sheep.png" style="width:6em; display: flex;    margin-left: auto;">
+                <aside class="notes">
+                    Avoid to rely on an external resource.
+                    Really useful for IOs
+                </aside>
+            </section>
+
+
+
+            <section>
+                <h4>Benefits</h4>
+                <ul>
+                    <li>Implemented code matches the spec</li>
+                    <li>Think about corner cases</li>
+                    <li>Improve confidence</li>
+                    <li>Facilitate refactoring</li>
+                    <li>Detect regressions</li>
+                    <li>Focus on your new work (instead of looking for breaking changes)</li>
+                    <li>...</li>
+                </ul>
+                <aside class="notes">
+                    lot of benefits with test ... blablabla
+                    => find something confusing about tests like listing a lot of techno:
+                    - cucumber, hypothesis, ....
+
+                </aside>
+            </section>
+        </section>
+
+
+        <!-- Testable code -->
+        <section>
+            <section>
+                <h2>Testable code</h2>
+
+            </section>
+
+            <section>
+                <h3>Example of not easily testable code</h3>
+                <img class="fragment current-visible preload" src="./img/bad_code1.png"
+                      style="height:15em; margin-top:-2%"/>
+                <img class="fragment current-visible " src="./img/bad_code2.png"
+                     style="height:15em; margin-top:-2%"/>
+                <img class="fragment current-visible" src="./img/bad_code3.png"
+                     style="height:15em; margin-top:-2%"/>
+            </section>
+            <section>
+                <h3>Testable Code Principles / Methodologies</h3>
+                <ul class="fragment">
+                    <li style="text-align:left">S.O.L.I.D.</li>
+                    <ul  class="fragment">
+                        <li>Single Responsibility</li>
+                        <li>Open-Closed</li>
+                        <li>Liskov Substitution</li>
+                        <li>Interface Segregation</li>
+                        <li>Dependency Injection</li>
+                    </ul>
+                    <li  class="fragment" style="text-align:left">TDD</li>
+                    <li  class="fragment" style="text-align:left">Immutable code</li>
+                    <li  class="fragment" style="text-align:left">...</li>
+                </ul>
+                <aside class="notes">
+                    benefits: system reusable, maintainable, scalable, testable and more
+                </aside>
+            </section>
+            <section>
+                <h3>Single Responsibility</h3>
+                <div class="parts fragment">
+                    <div class="half">
+                        <img src="./img/bad_code3.png" style="height:12em;"/>
+                    </div>
+                    <div class="half">
+                        <pre><code class="python highlight"
+                                   style="font-size: 80%">def save_recipe_from_file(file_path):
+    parsed_data = parse_file(file_path)
+    recipe = build_recipe(parsed_data)
+    save_recipe_in_db(recipe)</code></pre>
+                        <pre class="fragment"><code class="python highlight"
+                                                    style="font-size: 80%">def test_parse_file():
+    [...]
+
+def test_build_recipe():
+    [...]
+
+def test_save_recipe_in_db():
+    [...]</code></pre>
+                    </div>
+                </div>
+
+                <aside class="notes">
+                    Now can easily test recipe obj creation, db createion, parsing
+                    But still rely too test whole function
+                </aside>
+            </section>
+            <section>
+                <h4>Dependency Injection</h4>
+                <img src="./img/code_class1.png">
+                <div class="parts">
+                    <div class="half">
+                        <img class="fragment" src="./img/code_class2.png" style="height:4em">
+                    </div>
+                    <div class="half">
+                        <img class="fragment" src="./img/code_class3.png">
+                    </div>
+                </div>
+                <aside class="notes">
+                    easie to test against fake db, ...
+                </aside>
+
+            </section>
+            <section>
+                <h4>How to write testable code</h4>
+                <ul>
+                    <li class="fragment" data-fragment-index="2">Have a look at the S.O.L.I.D. principles</li>
+                    <li class="fragment" data-fragment-index="3">Think about test when you are writing code (TDD approach)</li>
+                    <li class="fragment" data-fragment-index="1"><b>Care about your tests as much as you care about your code</b></li>
+                    <li class="fragment" data-fragment-index="4">Keep thing simple</li>
+                    <li class="fragment" data-fragment-index="5">Organise/split your code</li>
+                    <li class="fragment" data-fragment-index="6">Avoid the sources of flakiness</li>
+                </ul>
+            </section>
+
+        </section>
+
+        <!--Tools and automation -->
+        <section>
+            <section>
+                <h3>Tools and automation</h3>
+            </section>
+            <section>
+                <h3>Starter Pack</h3>
+                <ul>
+                    <li>pytest (fixtures, coverage, ...): easily write and run your tests </li>
+                    <li>Hypothesis: property based testing</li>
+                    <li>Docker: run your E2E tests in isolation</li>
+                    <li>tox or Makefile: create your tests command</li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Test Metrics: code coverage</h3>
+                <pre><code>----------- coverage: platform linux, python 3.6.8-final-0 -
+Name                                     Stmts   Miss  Cover
+------------------------------------------------------------
+mlvtools/__init__.py                         0      0   100%
+mlvtools/check_script.py                    47      0   100%
+mlvtools/conf/__init__.py                    0      0   100%
+mlvtools/conf/conf.py                       83      2    98%
+[...]
+mlvtools/docstring_helpers/__init__.py       0      0   100%
+mlvtools/docstring_helpers/extract.py       43      1    98%
+mlvtools/docstring_helpers/parse.py        115      5    96%
+mlvtools/exception.py                        4      0   100%
+------------------------------------------------------------
+TOTAL                                      746     25    97%</code></pre>
+                <p>Detect the lack of tests</p>
+
+                <aside class="notes">
+                    - pytest-cov easy to setup
+                    - detect not tested parts
+                    - a 100% coverage does not mean your code is well tested
+                </aside>
+
+            </section>
+            <section>
+                <h3>Continuous Integration</h3>
+                <ul>
+                    <li>Reuse your tests commands (tox/make/...) for each CI step</li>
+                    <li>Reuse your E2E Docker image</li>
+                    <li>GitLab CI, Circle CI, Azure, Jenkins, ... </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <h3>Where To Start?</h3>
+            <p style="text-align:left" class="fragment">1. Identify the most <b>critical</b> part of you pipeline</p>
+            <p style="text-align:left" class="fragment">2. Create your <b>test structure</b></p>
+            <p style="text-align:left" class="fragment">3. Bootstrap: start writing <b>some simple tests</b> with your <b>guidelines</b></p>
+            <p style="text-align:left" class="fragment">4. Create a first simple CI pipeline step for unit tests</p>
+            <p style="text-align:left" class="fragment">5. Run this pipeline on each PR</p>
+            <p style="text-align:left" class="fragment">6. Add a test coverage tool</p>
+            <p style="text-align:left" class="fragment">7. <b>Increase the test coverage</b> with each new PR (bug fix, refactoring, new feature)</p>
+        </section>
+        <section>
+            <h3> Any questions? </h3>
+            <p class="small">
+                </br></br>
+                <img class="icon" src="./img/GitHub-logo.png" style="width: 1em"> github.com/sbracaloni/ml-versioning-tools </br>
+                <img class="icon" src="./img/linkedin.png" style="width: 1em"> in/sbracaloni/<br/>
+            </p>
+
+            <p class="footnote">
+
+                Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>,
+                <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a>,
+                from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>; <br/>
+                GIF <a href="https://giphy.com/">Giphy: <a href=https://fyspringfield.com/post/108112518098>homer</a>,
+                <a href="https://cookies-and-sugar.tumblr.com/post/76834308897">computer dog</a>,
+            <a href="http://ww1.jewelsartcreation.com/">gold fish</a> </a></p>
+        </section>
+
+    </div>
+</div>
+<script src="../reveal.js/js/reveal.js"></script>
+<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+<!--<script src="../pyData/head.min.js"></script>-->
+<script>
+		Reveal.initialize({
+			history: true,
+			slideNumber: true,
+			dependencies: [
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true },
+					{ src: '../reveal.js/plugin/external/external/external.js',
+					condition: function() { return !!document.querySelector( '[data-external]' ); } }
+				],
+
+		});
+		Reveal.addEventListener( 'slidechanged', function( event ) {
+    Reveal.nextFragment();
+} );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
